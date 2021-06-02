@@ -33,11 +33,26 @@ function awslogin() {
 	echo "--------------"
 }
 
+clear_codecommit_logins () {
+  security delete-internet-password -l "git-codecommit.ap-southeast-2.amazonaws.com"  ~/Library/Keychains/login.keychain-db && clear_codecommit_logins || echo 'all clear'
+}
+
 export AWS_DEFAULT_REGION='ap-southeast-2'
 export AWS_PROFILE='saml'
 export AWS_ACCOUNT_NAME="AWS-NonProd"
 export SAML2AWS_USERNAME='' # Username
 export SAML2AWS_PASSWORD='' # PW
+
+export NODE_EXTRA_CA_CERTS=~/path/to/cert/pem/file
+
+############
+# Bashi_it Proxy
+############
+
+BASH_IT_HTTP_PROXY="http://${MYUSR}:${MYPWD}@proxy.com:8080"
+BASH_IT_HTTPS_PROXY="http://${MYUSR}:${MYPWD}@proxy.com:8080"
+BASH_IT_NO_PROXY="localhost,local,127.0.0.1"
+
 
 function display_aws_profile() {
 	RED='\033[0;31m'
